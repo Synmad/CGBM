@@ -2,12 +2,22 @@ using UnityEngine;
 
 public class CGuyRunController : MonoBehaviour
 {
-    Rigidbody2D rb;
+    CGuyInput _input;
+    
+    [SerializeField] Rigidbody2D _rb;
 
-    [SerializeField] float runSpeed;
+    [SerializeField] float _runSpeed;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
 
     private void FixedUpdate()
     {
-        rb.velocity = CGuyInput.instance.runningDirection * runSpeed;
+        if(CGuyStateManager.currentState == CGuyStateManager.State.Default)
+        {
+            _rb.velocity = (new Vector2(CGuyInput.runDirection.x * _runSpeed, _rb.velocity.y));
+        }
     }
 }
