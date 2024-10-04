@@ -3,25 +3,26 @@ using UnityEngine.InputSystem;
 
 public class CGuyInput : MonoBehaviour
 {
-    public static CGuyInput instance;
+    public static CGuyInput Instance;
 
-    public static CoolGuyInputActions inputActions { get; private set; } 
+    public CoolGuyInputActions InputActions { get; private set; } 
 
-    public static Vector2 runDirection { get; private set; }
+    public Vector2 RunDirection { get; private set; }
 
     private void Awake()
     {
-        if (instance == null) { instance = this; }
-        else { Destroy(this); }
+        if (Instance != null && Instance != this) Destroy(this); 
+        else Instance = this;
 
-        inputActions = new();
+        InputActions = new();
     }
-    private void OnEnable() => inputActions.Enable();
+
+    private void OnEnable() => InputActions.Enable();
 
     private void Update()
     {
-        runDirection = inputActions.Main.Run.ReadValue<Vector2>();
+        RunDirection = InputActions.Main.Run.ReadValue<Vector2>();
     }
 
-    private void OnDisable() => inputActions.Disable();
+    private void OnDisable() => InputActions.Disable();
 }

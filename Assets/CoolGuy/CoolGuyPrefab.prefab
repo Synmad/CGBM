@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: -4311461684792854312}
   _speed: 19.5
-  _duration: 0.1
+  _duration: 0.3
 --- !u!114 &2859371591839860600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28233433f19b5cc4593a432e165526dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <isOnFlat>k__BackingField: 0
+  <IsOnFlat>k__BackingField: 0
 --- !u!114 &-5894657688822032465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,5 +246,6 @@ MonoBehaviour:
   _defaultGravity: 1
   _upwardGravity: 2.2
   _downwardGravity: 2
-  _lowJumpWeight: 4
+  _jumpHeight: 5
+  _lowJumpWeight: 3
   _velocity: {x: 0, y: 0}

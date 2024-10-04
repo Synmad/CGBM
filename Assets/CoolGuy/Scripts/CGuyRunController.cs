@@ -17,7 +17,7 @@ public class CGuyRunController : MonoBehaviour
     {
         if(CGuyStateManager.currentState == CGuyStateManager.State.Default)
         {
-            _rb.velocity = (new Vector2(CGuyInput.runDirection.x * _runSpeed, _rb.velocity.y));
+            _rb.velocity = (new Vector2(CGuyInput.Instance.RunDirection.x * _runSpeed, _rb.velocity.y));
         }
     }
 }
