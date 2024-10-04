@@ -1,17 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class CGuyInput : MonoBehaviour
+public class BMetalInputManager : MonoBehaviour
 {
-    public static CGuyInput Instance;
+    public static BMetalInputManager Instance;
 
-    public CoolGuyInputActions InputActions { get; private set; } 
+    public BigMetalInputActions InputActions { get; private set; }
 
     public Vector2 RunDirection { get; private set; }
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) Destroy(this); 
+        if (Instance != null && Instance != this) Destroy(this);
         else Instance = this;
 
         InputActions = new();
@@ -26,3 +27,4 @@ public class CGuyInput : MonoBehaviour
 
     private void OnDisable() => InputActions.Disable();
 }
+

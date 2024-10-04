@@ -14,7 +14,7 @@ public class CGuyDashController : MonoBehaviour
 
     private void OnEnable()
     {
-        CGuyInput.Instance.InputActions.Main.Dash.started += DashInput;
+        CGuyInputManager.Instance.InputActions.Main.Dash.started += DashInput;
     }
 
     void DashInput(InputAction.CallbackContext context)
@@ -24,7 +24,7 @@ public class CGuyDashController : MonoBehaviour
 
     private void Update()
     {
-        if(CGuyCollisionController.Instance.IsOnFlat && 
+        if(FlatSurfaceChecker.Instance.IsOnFlat && 
            CGuyStateManager.currentState != CGuyStateManager.State.Dashing)
         {
             _dashReady = true;
@@ -47,7 +47,7 @@ public class CGuyDashController : MonoBehaviour
             CGuyStateManager.ChangeState(CGuyStateManager.State.Dashing);
 
             _rb.velocity = Vector2.zero;
-            _rb.velocity = CGuyInput.Instance.RunDirection.normalized * _speed;
+            _rb.velocity = CGuyInputManager.Instance.RunDirection.normalized * _speed;
 
             StartCoroutine(StopDashing());
         }
@@ -61,6 +61,6 @@ public class CGuyDashController : MonoBehaviour
 
     private void OnDisable()
     {
-        CGuyInput.Instance.InputActions.Main.Dash.started -= DashInput;
+        CGuyInputManager.Instance.InputActions.Main.Dash.started -= DashInput;
     }
 }

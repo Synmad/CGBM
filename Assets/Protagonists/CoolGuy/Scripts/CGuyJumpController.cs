@@ -12,12 +12,12 @@ public class CGuyJumpController : MonoBehaviour
 
     private void OnEnable()
     {
-        CGuyInput.Instance.InputActions.Main.Jump.started += JumpInput;
+        CGuyInputManager.Instance.InputActions.Main.Jump.started += JumpInput;
     }
 
     void JumpInput(InputAction.CallbackContext context)
     {
-        if (CGuyCollisionController.Instance.IsOnFlat) JumpAction();
+        if (FlatSurfaceChecker.Instance.IsOnFlat) JumpAction();
     }
 
     void JumpAction()
@@ -36,7 +36,7 @@ public class CGuyJumpController : MonoBehaviour
         if (_rb.velocity.y == 0) _rb.gravityScale = _defaultGravity;
         else if (_rb.velocity.y > 0)
         {
-            if (CGuyInput.Instance.InputActions.Main.Jump.IsPressed() ||
+            if (CGuyInputManager.Instance.InputActions.Main.Jump.IsPressed() ||
                 CGuyStateManager.currentState == CGuyStateManager.State.Dashing)
                 _rb.gravityScale = _upwardGravity;
             else _rb.gravityScale = _upwardGravity + _lowJumpWeight;
@@ -44,5 +44,5 @@ public class CGuyJumpController : MonoBehaviour
         else if (_rb.velocity.y < 0) _rb.gravityScale = _downwardGravity;
     }
 
-    private void OnDisable() => CGuyInput.Instance.InputActions.Main.Jump.started -= JumpInput;
+    private void OnDisable() => CGuyInputManager.Instance.InputActions.Main.Jump.started -= JumpInput;
 }

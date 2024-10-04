@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-public class CGuyCollisionController : MonoBehaviour
+public class FlatSurfaceChecker : MonoBehaviour
 {
-    public static CGuyCollisionController Instance { get; private set; }
+    public static FlatSurfaceChecker Instance { get; private set; }
 
     [field:SerializeField] public bool IsOnFlat { get; private set; }
 
