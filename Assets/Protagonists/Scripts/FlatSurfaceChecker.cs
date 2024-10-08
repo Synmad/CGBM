@@ -3,19 +3,11 @@ using UnityEngine;
 
 public class FlatSurfaceChecker : MonoBehaviour
 {
-    public static FlatSurfaceChecker Instance { get; private set; }
-
     [field:SerializeField] public bool IsOnFlat { get; private set; }
 
     Vector2 _normal;
 
     public static Action OnLanded;
-
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(this);
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

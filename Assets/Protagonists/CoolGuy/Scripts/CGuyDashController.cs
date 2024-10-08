@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class CGuyDashController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rb;
+    [SerializeField] FlatSurfaceChecker _flatChecker;
 
     [SerializeField] float _speed, _duration;
 
@@ -24,7 +25,7 @@ public class CGuyDashController : MonoBehaviour
 
     private void Update()
     {
-        if(FlatSurfaceChecker.Instance.IsOnFlat && 
+        if(_flatChecker.IsOnFlat && 
            CGuyStateManager.currentState != CGuyStateManager.State.Dashing)
         {
             _dashReady = true;

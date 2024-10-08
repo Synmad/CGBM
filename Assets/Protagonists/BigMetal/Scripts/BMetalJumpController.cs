@@ -1,18 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BMetalJumpController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Rigidbody2D _rb;
+    [SerializeField] FlatSurfaceChecker _flatChecker;
+
+    [SerializeField] float _defaultGravity, _upwardGravity, _downwardGravity;
+    [SerializeField] float _jumpHeight, _lowJumpWeight;
+
+    private void OnEnable()
     {
-        
+        BMetalInputManager.Instance.InputActions.Main.Jump.started += JumpInput;
     }
 
-    // Update is called once per frame
-    void Update()
+    void JumpInput(InputAction.CallbackContext context)
     {
-        
+        if (_flatChecker.IsOnFlat) JumpAction();
     }
+
+    void JumpAction()
+    {
+        float jumpSpeed = Mathf.Sqrt(-2 * Physics2D.gravity.y * _jumpHeight);
+        if (_rb.velocity.y > 0) jumpSpeed = Mathf.Max(jumpSpeed - _rb.velocity.y, 0);
+
+        _rb.velocity = new Vector2(_rb.velocity.x, jumpSpeed);
+    }
+
+    private void FixedUpdate()
+    {
+        if (_rb.velocity.y == 0) _rb.gravityScale = _defaultGravity;
+        else if (_rb.velocity.y > 0)
+        {
+            if (BMetalInputManager.Instance.InputActions.Main.Jump.IsPressed())
+                _rb.gravityScale = _upwardGravity;
+            else _rb.gravityScale = _upwardGravity + _lowJumpWeight;
+        }
+        else if (_rb.velocity.y < 0) _rb.gravityScale = _downwardGravity;
+    }
+
+    private void OnDisable() => BMetalInputManager.Instance.InputActions.Main.Jump.started -= JumpInput;
 }

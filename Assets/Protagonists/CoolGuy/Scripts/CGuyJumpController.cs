@@ -4,11 +4,10 @@ using UnityEngine.InputSystem;
 public class CGuyJumpController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rb;
+    [SerializeField] FlatSurfaceChecker _flatChecker;
 
     [SerializeField] float _defaultGravity, _upwardGravity, _downwardGravity;
     [SerializeField] float _jumpHeight, _lowJumpWeight;
-
-    [SerializeField] Vector2 _velocity;
 
     private void OnEnable()
     {
@@ -17,7 +16,7 @@ public class CGuyJumpController : MonoBehaviour
 
     void JumpInput(InputAction.CallbackContext context)
     {
-        if (FlatSurfaceChecker.Instance.IsOnFlat) JumpAction();
+        if (_flatChecker.IsOnFlat) JumpAction();
     }
 
     void JumpAction()

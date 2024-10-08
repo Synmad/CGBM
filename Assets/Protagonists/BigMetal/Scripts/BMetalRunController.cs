@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BMetalRunController : MonoBehaviour
 {
-    BMetalInputManager _input;
-
     [SerializeField] Rigidbody2D _rb;
 
     [SerializeField] float _runSpeed;
@@ -26,9 +22,6 @@ public class BMetalRunController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (CGuyStateManager.currentState == CGuyStateManager.State.Default)
-        {
-            Run();
-        }
+        Run();
     }
 }

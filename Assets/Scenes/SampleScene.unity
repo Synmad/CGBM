@@ -396,8 +396,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigMetalPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 3691459836850059459, guid: 345826a5245b7b14dacf7cd212dbc6cc, type: 3}
+      propertyPath: m_Name
+      value: DownAim
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220187092937438884, guid: 345826a5245b7b14dacf7cd212dbc6cc, type: 3}
+      propertyPath: m_Name
+      value: UpAim
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3055749486244468597, guid: 345826a5245b7b14dacf7cd212dbc6cc, type: 3}
+    - {fileID: 3267234313271906068, guid: 345826a5245b7b14dacf7cd212dbc6cc, type: 3}
+    - {fileID: 5431424078121284963, guid: 345826a5245b7b14dacf7cd212dbc6cc, type: 3}
+    - {fileID: 1212291283684467678, guid: 345826a5245b7b14dacf7cd212dbc6cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 345826a5245b7b14dacf7cd212dbc6cc, type: 3}
