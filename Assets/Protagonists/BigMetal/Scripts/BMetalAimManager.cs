@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,8 +8,12 @@ public class BMetalAimManager : MonoBehaviour
     [SerializeField] GameObject _downAim; 
     [SerializeField] GameObject _leftAim;
 
+    public GameObject EnabledAim { get; private set; }
+
     private void OnEnable()
     {
+        EnableAim(_rightAim);
+
         BMetalInputManager.Instance.InputActions.Main.AimUp.performed += EnableUpAim;
         BMetalInputManager.Instance.InputActions.Main.AimRight.performed += EnableRightAim;
         BMetalInputManager.Instance.InputActions.Main.AimDown.performed += EnableDownAim;
@@ -20,26 +22,32 @@ public class BMetalAimManager : MonoBehaviour
 
     void EnableUpAim(InputAction.CallbackContext context)
     {
-        _upAim.SetActive(true);
+        EnableAim(_upAim);
         _rightAim.SetActive(false); _downAim.SetActive(false); _leftAim.SetActive(false);
     }
 
     void EnableRightAim(InputAction.CallbackContext context)
     {
-        _rightAim.SetActive(true);
+        EnableAim(_rightAim);
         _upAim.SetActive(false); _downAim.SetActive(false); _leftAim.SetActive(false);
     }
 
     void EnableDownAim(InputAction.CallbackContext context)
     {
-        _downAim.SetActive(true);
+        EnableAim(_downAim);
         _upAim.SetActive(false); _rightAim.SetActive(false); _leftAim.SetActive(false);
     }
 
     void EnableLeftAim(InputAction.CallbackContext context)
     {
-        _leftAim.SetActive(true);
+        EnableAim(_leftAim);
         _upAim.SetActive(false); _rightAim.SetActive(false); _downAim.SetActive(false);
+    }
+
+    void EnableAim(GameObject newAim)
+    {
+        newAim.SetActive(true);
+        EnabledAim = newAim;
     }
 
     private void OnDisable()

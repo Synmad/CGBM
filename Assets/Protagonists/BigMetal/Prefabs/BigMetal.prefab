@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 3089449817656463502}
   - component: {fileID: 7510457115710670582}
   m_Layer: 0
-  m_Name: BigMetalPrefab
+  m_Name: BigMetal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,6 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2277c7a945d940478ae5c2cde3b3baa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _aim: {fileID: 7510457115710670582}
+  _bulletPool: {fileID: 0}
   _shootingCooldown: 0.3
   _canShoot: 1
 --- !u!114 &7510457115710670582

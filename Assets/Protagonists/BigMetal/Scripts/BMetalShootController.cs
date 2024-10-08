@@ -4,10 +4,19 @@ using UnityEngine.InputSystem;
 
 public class BMetalShootController : MonoBehaviour
 {
+    [SerializeField] private BMetalAimManager _aim;
+    private BMetalBulletPoolController _bulletPool;
+
     [SerializeField] private float _shootingCooldown;
     [SerializeField] private bool _canShoot = true;
-    
+
+    private GameObject _bullet;
     private bool _isShooting;
+
+    private void Awake()
+    {
+        _bulletPool = BMetalBulletPoolController.Instance;
+    }
 
     private void OnEnable()
     {
@@ -20,7 +29,7 @@ public class BMetalShootController : MonoBehaviour
         if (_canShoot)
         {
             _isShooting = true;
-            StartCoroutine(Shooting());
+            StartCoroutine(ShootingLoop());
         }
     }
 
@@ -29,18 +38,27 @@ public class BMetalShootController : MonoBehaviour
         _isShooting = false;
     }
 
-    private IEnumerator Shooting()
+    private IEnumerator ShootingLoop()
     {
         while (_isShooting)
         {
-            if(_canShoot)
+            if (_canShoot)
             {
                 _canShoot = false;
-
-                Debug.Log("Shooting");
-
+                Shoot();
                 yield return StartCoroutine(ResetShooting());
             }
+        }
+    }
+
+    private void Shoot()
+    {
+        _bullet = _bulletPool.GetPooledBullets();
+
+        if (_bullet != null )
+        {
+            _bullet.transform.position = _aim.EnabledAim.transform.position;
+            _bullet.SetActive(true);
         }
     }
 
