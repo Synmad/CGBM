@@ -3,12 +3,20 @@ using UnityEngine.InputSystem;
 
 public class BMetalAimManager : MonoBehaviour
 {
+    public static BMetalAimManager Instance { get; private set; }
+
     [SerializeField] GameObject _upAim;
     [SerializeField] GameObject _rightAim;
     [SerializeField] GameObject _downAim; 
     [SerializeField] GameObject _leftAim;
 
     public GameObject EnabledAim { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(this); }
+        else { Instance = this; }
+    }
 
     private void OnEnable()
     {
@@ -20,6 +28,7 @@ public class BMetalAimManager : MonoBehaviour
         BMetalInputManager.Instance.InputActions.Main.AimLeft.performed += EnableLeftAim;
     }
 
+    #region Aim Enabling Methods
     void EnableUpAim(InputAction.CallbackContext context)
     {
         EnableAim(_upAim);
@@ -49,6 +58,7 @@ public class BMetalAimManager : MonoBehaviour
         newAim.SetActive(true);
         EnabledAim = newAim;
     }
+    #endregion
 
     private void OnDisable()
     {

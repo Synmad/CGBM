@@ -8,12 +8,14 @@ public class BMetalShootController : MonoBehaviour
     private BMetalBulletPoolController _bulletPool;
 
     [SerializeField] private float _shootingCooldown;
+    [SerializeField] private float _fireForce;
+
     [SerializeField] private bool _canShoot = true;
 
     private GameObject _bullet;
     private bool _isShooting;
 
-    private void Awake()
+    private void Start()
     {
         _bulletPool = BMetalBulletPoolController.Instance;
     }
@@ -58,7 +60,10 @@ public class BMetalShootController : MonoBehaviour
         if (_bullet != null )
         {
             _bullet.transform.position = _aim.EnabledAim.transform.position;
+            _bullet.transform.rotation = _aim.EnabledAim.transform.rotation;
             _bullet.SetActive(true);
+            _bullet.GetComponent<Rigidbody2D>().AddForce(_aim.EnabledAim.transform.right * _fireForce, ForceMode2D.Impulse);
+
         }
     }
 
