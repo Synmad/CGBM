@@ -3,8 +3,9 @@ using UnityEngine.InputSystem;
 
 public class CGuyJumpController : MonoBehaviour
 {
+    [SerializeField] CGuyStateManager _state;
     [SerializeField] Rigidbody2D _rb;
-    [SerializeField] FlatSurfaceChecker _flatChecker;
+    [SerializeField] FlatSurfaceCheckController _flatChecker;
 
     [SerializeField] float _defaultGravity, _upwardGravity, _downwardGravity;
     [SerializeField] float _jumpHeight, _lowJumpWeight;
@@ -36,7 +37,7 @@ public class CGuyJumpController : MonoBehaviour
         else if (_rb.velocity.y > 0)
         {
             if (CGuyInputManager.Instance.InputActions.Main.Jump.IsPressed() ||
-                CGuyStateManager.currentState == CGuyStateManager.State.Dashing)
+                _state.currentState == CGuyStateManager.State.Dashing)
                 _rb.gravityScale = _upwardGravity;
             else _rb.gravityScale = _upwardGravity + _lowJumpWeight;
         }

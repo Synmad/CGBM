@@ -5,12 +5,13 @@ public class CGuyStateManager : MonoBehaviour
     public enum State
     {
         Default,
-        Dashing
+        Dashing,
+        Dead
     }
 
-    [field: SerializeField] public static State currentState { get; private set; }
+    [field: SerializeField] public State currentState { get; private set; }
 
     private void Awake() => currentState = State.Default;
 
-    public static void ChangeState (State newState) => currentState = newState;
+    public void ChangeState (State newState) => currentState = newState;
 }

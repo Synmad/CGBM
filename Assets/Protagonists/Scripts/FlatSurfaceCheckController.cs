@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class FlatSurfaceChecker : MonoBehaviour
+public class FlatSurfaceCheckController : MonoBehaviour
 {
     [field:SerializeField] public bool IsOnFlat { get; private set; }
 

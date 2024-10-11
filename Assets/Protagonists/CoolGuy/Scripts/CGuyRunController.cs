@@ -3,7 +3,8 @@ using UnityEngine;
 public class CGuyRunController : MonoBehaviour
 {
     CGuyInputManager _input;
-    
+
+    [SerializeField] CGuyStateManager _state;
     [SerializeField] Rigidbody2D _rb;
 
     [SerializeField] float _runSpeed;
@@ -27,7 +28,7 @@ public class CGuyRunController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(CGuyStateManager.currentState == CGuyStateManager.State.Default)
+        if(_state.currentState == CGuyStateManager.State.Default)
         {
             Run();
         }

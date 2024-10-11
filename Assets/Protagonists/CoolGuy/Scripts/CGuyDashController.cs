@@ -4,8 +4,9 @@ using UnityEngine.InputSystem;
 
 public class CGuyDashController : MonoBehaviour
 {
+    [SerializeField] CGuyStateManager _state;
     [SerializeField] Rigidbody2D _rb;
-    [SerializeField] FlatSurfaceChecker _flatChecker;
+    [SerializeField] FlatSurfaceCheckController _flatChecker;
 
     [SerializeField] float _speed, _duration;
 
@@ -23,17 +24,22 @@ public class CGuyDashController : MonoBehaviour
         if (_canDash) DashAction();
     }
 
+    public void ReadyDash()
+    {
+        _dashReady = true;
+    }
+
     private void Update()
     {
         if(_flatChecker.IsOnFlat && 
-           CGuyStateManager.currentState != CGuyStateManager.State.Dashing)
+           _state.currentState != CGuyStateManager.State.Dashing)
         {
-            _dashReady = true;
+            ReadyDash();
         }
 
 
         if (_dashReady && 
-            CGuyStateManager.currentState != CGuyStateManager.State.Dashing)
+            _state.currentState != CGuyStateManager.State.Dashing)
         {
             _canDash = true;
         }
@@ -42,10 +48,10 @@ public class CGuyDashController : MonoBehaviour
 
     void DashAction()
     {
-        if(CGuyStateManager.currentState == CGuyStateManager.State.Default)
+        if(_state.currentState == CGuyStateManager.State.Default)
         {
             _dashReady = false;
-            CGuyStateManager.ChangeState(CGuyStateManager.State.Dashing);
+            _state.ChangeState(CGuyStateManager.State.Dashing);
 
             _rb.velocity = Vector2.zero;
             _rb.velocity = CGuyInputManager.Instance.RunDirection.normalized * _speed;
@@ -57,7 +63,7 @@ public class CGuyDashController : MonoBehaviour
     IEnumerator StopDashing() 
     {
         yield return new WaitForSeconds(_duration);
-        CGuyStateManager.ChangeState(CGuyStateManager.State.Default);
+        _state.ChangeState(CGuyStateManager.State.Default);
     }
 
     private void OnDisable()

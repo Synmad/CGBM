@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class BMetalJumpController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rb;
-    [SerializeField] FlatSurfaceChecker _flatChecker;
+    [SerializeField] FlatSurfaceCheckController _flatChecker;
 
     [SerializeField] float _defaultGravity, _upwardGravity, _downwardGravity;
     [SerializeField] float _jumpHeight, _lowJumpWeight;
